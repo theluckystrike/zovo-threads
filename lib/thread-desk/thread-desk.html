@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>Zovo Threads</title>
+	<link rel="stylesheet" href="thread-desk.css">
+</head>
+<body>
+	<main class="thd-shell">
+		<header class="thd-header">
+			<img src="icon48.png" width="40" height="40" alt="">
+			<div><h1>Zovo Threads</h1><p>Keep your place in every conversation.</p></div>
+			<span class="thd-tier" id="tierBadge">Free</span>
+		</header>
+
+		<section class="thd-hero" aria-labelledby="heroTitle">
+			<p class="thd-label">Thread desk</p>
+			<h2 id="heroTitle">Read at your own pace.</h2>
+			<p>Use <kbd>J</kbd> and <kbd>K</kbd> to move, <kbd>E</kbd> to expand media, and <kbd>X</kbd> to fold it away.</p>
+		</section>
+
+		<section class="thd-metrics" aria-label="Local activity" role="status" aria-live="polite">
+			<div><strong id="tagCount">0</strong><span>local tags</span></div>
+			<div><strong id="filterCount">0</strong><span>filters</span></div>
+			<div><strong id="positionCount">0</strong><span>saved threads</span></div>
+		</section>
+
+		<div class="thd-actions">
+			<button class="thd-primary" id="openSettings" type="button">Open full settings</button>
+			<button class="thd-quiet" id="clearPosition" type="button">Clear this thread’s position</button>
+			<p class="thd-status" id="actionStatus" role="status" aria-live="polite"></p>
+		</div>
+
+		<section class="thd-license" aria-labelledby="licenseTitle">
+			<div class="thd-license-copy"><p class="thd-label">Pro licence</p><h2 id="licenseTitle">Support open-source development</h2></div>
+			<a class="thd-upgrade" href="https://zovo.one/pricing?utm_source=zovo-threads&amp;utm_medium=extension&amp;utm_campaign=upgrade" target="_blank" rel="noopener noreferrer">See Pro options</a>
+			<form id="licenseForm">
+				<label for="licenseKey">Existing key</label>
+				<div><input id="licenseKey" name="key" autocomplete="off" spellcheck="false" maxlength="24" placeholder="ZOVO-XXXX-XXXX-XXXX-XXXX"><button type="submit">Activate</button></div>
+			</form>
+			<div class="thd-license-foot"><p id="licenseStatus" role="status" aria-live="polite"></p><button id="deactivate" type="button">Remove licence</button></div>
+		</section>
+
+		<footer><a href="https://github.com/theluckystrike/zovo-threads" target="_blank" rel="noopener noreferrer">GPL-3.0 source</a><span>Thread memory and tags stay local.</span></footer>
+	</main>
+	<script src="thread-desk.entry.js"></script>
+</body>
+</html>

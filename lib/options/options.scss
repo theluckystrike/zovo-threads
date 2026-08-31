@@ -1,0 +1,775 @@
+html {
+	padding: 10px;
+}
+
+body {
+	color: #000;
+	font-family: verdana, arial, helvetica, sans-serif;
+	font-size: 12px;
+	margin: 0;
+	width: 100%;
+	height: 100%;
+	box-sizing: border-box;
+	border-radius: 3px;
+	box-shadow: 5px 5px 10px rgb(0 0 0 / 20%);
+}
+
+ul,
+li {
+	display: block;
+	padding: 0;
+}
+
+#RESConsoleContainer {
+	background-color: #fff;
+
+	&:not(.advanced-options-enabled) .advanced {
+		display: none;
+	}
+}
+
+.RESDonateButton {
+	display: inline-block;
+	background-color: white;
+	color: orangered;
+	border-radius: 10px;
+	padding: 10px 20px;
+	border: 1px solid rgb(255 69 0);
+}
+
+.donateOption {
+	margin-top: 25px;
+	text-align: center;
+	float: left;
+	width: 50%;
+	height: 150px;
+}
+
+.donateOption:last-child {
+	margin-right: 0;
+}
+
+.RESDialogTopBar {
+	border-radius: 3px 3px 0 0;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 40px;
+	margin-bottom: 10px;
+	padding: 10px 10px 0 10px;
+	border-bottom: 1px solid #c7c7c7;
+	background-color: #f0f3fc;
+}
+
+#RESConsoleTopBar {
+	padding-right: 30px;
+	margin: 0;
+	height: auto;
+	position: relative;
+	overflow: auto;
+
+	h1 {
+		display: inline-block;
+		margin: 0;
+		padding: 0;
+		font-size: 14px;
+		vertical-align: middle;
+	}
+}
+
+#RESConsoleSubredditLink {
+	display: inline-block;
+	margin-left: 1em;
+	font-size: 10px;
+	vertical-align: middle;
+}
+
+#RESAllOptionsSpan {
+	display: flex; // removes white space
+	color: #868686;
+	font-size: 11px;
+	margin-top: 5px;
+}
+
+#RESConsoleContent {
+	display: flex;
+	top: 41px;
+	padding-left: 5px;
+	height: calc(100vh - 61px);
+
+	#contributeContents {
+		padding-top: 15px;
+
+		p {
+			margin-bottom: 20px;
+			font-size: 14px;
+		}
+
+		h1 {
+			margin-top: 40px;
+		}
+	}
+}
+
+#RESConfigPanelOptions {
+	padding: 10px 10px 0 10px;
+	overflow: auto;
+	flex-grow: 1;
+
+	.moduleDescription {
+		margin-top: 5px;
+	}
+
+	p {
+		margin-bottom: 10px;
+	}
+}
+
+#allOptionsContainer {
+	position: relative;
+	max-width: 1150px;
+}
+
+#moduleOptionsScrim {
+	display: none;
+	position: absolute;
+	inset: 0 0 0 0;
+	z-index: 1;
+	background-color: rgb(255 255 255 / 70%);
+
+	&.visible {
+		display: block;
+	}
+}
+
+#RESConfigPanelModulesPane {
+	width: 200px;
+	padding-top: 5px;
+	flex-shrink: 0;
+}
+
+#RESConfigPanelModulesList {
+	color: rgb(80 80 80);
+	height: calc(100% - 55px);
+	overflow-y: auto;
+
+	> ul {
+		margin: 0;
+		border: 1px solid rgb(230 230 230);
+		border-radius: 2px;
+	}
+}
+
+.RESConfigPanelCategory {
+	max-height: 26px;
+	overflow-y: hidden;
+	transition: 0.3s;
+
+	&.active {
+		max-height: 1000px;
+	}
+
+	h3 {
+		text-align: left;
+		padding: 5px 10px;
+		margin: 0;
+		cursor: pointer;
+		border-top: 1px solid rgb(230 230 230);
+		font-weight: normal;
+	}
+
+	li.active h3 {
+		border-bottom: 1px solid rgb(230 230 230);
+		background: rgb(245 245 245);
+	}
+}
+
+%warning-icon {
+	content: '\F15A';
+	margin-left: 3px;
+	color: rgb(230 30 30);
+	font: normal 11px Batch;
+}
+
+#RESAllOptionsSpan::after {
+	@extend %warning-icon;
+}
+
+.optionContainer {
+	border: 1px solid hsl(205deg 50% 78%);
+	border-radius: 2px;
+	padding: 10px 20px;
+	background-color: #f0f3fc;
+	margin: 10px 0;
+	overflow-x: auto;
+	clear: both;
+	display: flex;
+
+	&.table,
+	&.specialOptionType {
+		display: block;
+	}
+
+	&.dependsOnDisabledOptions {
+		display: none;
+	}
+
+	&.highlight {
+		box-shadow: 0 0 5px 1px rgb(171 204 227);
+
+		.optionTitle {
+			font-weight: bold;
+		}
+	}
+
+	&.advanced .optionTitle::before {
+		@extend %warning-icon;
+
+		margin: 0 4px 0 -15px; // 4+(-15) = 11 == Batch font-size
+	}
+
+	&:not(.table, .specialOptionType) .optionSetting {
+		padding: 0 10px;
+		margin-right: 10px;
+		border-right: 1px dashed hsl(205deg 50% 78%);
+	}
+
+	table {
+		clear: both;
+		width: 100%;
+		margin-bottom: 10px;
+		border-collapse: collapse;
+	}
+
+	.wholeTableVisible {
+		max-height: 70vh;
+		overflow-y: auto;
+
+		th {
+			position: sticky;
+			top: 0;
+			z-index: 1;
+		}
+	}
+
+	.enum img {
+		max-width: 16px;
+	}
+}
+
+.optionTitle {
+	font-size: 14px;
+	min-width: 200px;
+	flex: 0 0 20%;
+}
+
+.optionKey {
+	font-size: .75em;
+	color: #999;
+}
+
+.optionSetting {
+	white-space: nowrap;
+	flex: 0 0 20%;
+}
+
+.optionDescription {
+	line-height: 1.5;
+	flex-grow: 1;
+}
+
+#RESConsoleContainer input[type='radio'],
+#RESConsoleContainer input[type='checkbox'] {
+	vertical-align: bottom;
+	margin: 0 3px 0 0;
+}
+
+.moduleButton {
+	font: 12px sans-serif;
+	color: rgb(180 180 180);
+	padding: 7px 10px;
+	cursor: pointer;
+
+	&.enabled {
+		color: rgb(80 80 80);
+	}
+
+	&.active {
+		font-weight: bold;
+		box-shadow: inset 5px 0 0 0 rgb(171 204 227);
+	}
+
+	small {
+		display: block;
+	}
+}
+
+.moduleToggle {
+	display: inline-flex; // removes white space
+	vertical-align: middle;
+}
+
+.moduleName {
+	font: 20px 'segoe ui', arial, sans-serif;
+	margin-right: 10px;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.moduleKey {
+	font-size: .75em;
+	color: #999;
+}
+
+.optionsTable {
+	th {
+		font-weight: bold;
+		font-size: 14px;
+		color: white;
+		text-shadow: 1px 1px 1px rgb(0 0 0 / 30%);
+		padding: 7px 5px;
+		background-color: rgb(150 191 232);
+	}
+
+	tr:nth-child(even) {
+		background-color: hsl(215deg 40% 93%);
+	}
+
+	td {
+		padding: 5px;
+	}
+
+	tr.dragged {
+		width: 80% !important;
+		background-color: transparent;
+
+		input[type='text'] {
+			width: auto !important;
+		}
+	}
+
+	input[type='text'] {
+		width: 100%;
+	}
+
+	textarea {
+		width: 100%;
+		min-width: 300px;
+		box-sizing: border-box;
+	}
+}
+
+#RESConsoleVersionDisplay {
+	display: inline-block;
+	font-size: 10px;
+	margin-left: 1em;
+	vertical-align: middle;
+}
+
+.RESConsoleButton {
+	padding: 3px 5px;
+	font-size: 12px;
+	border: 1px solid #636363;
+	border-radius: 3px;
+	overflow: hidden; // Contain the spinner when executing callback
+
+	+ .RESConsoleButton {
+		margin-left: 4px;
+	}
+}
+
+a.RESConsoleButton {
+	display: inline-block;
+}
+
+#moduleOptionsSave {
+	float: right;
+	cursor: pointer;
+	padding: 0 10px;
+	height: auto;
+	margin: -2px 1em 0 0;
+	font-size: 12px;
+	line-height: 22px;
+	color: #fff;
+	border: 1px solid #636363;
+	border-radius: 3px;
+	background-color: rgb(16 122 196 / 90%);
+
+	&:hover {
+		background-color: rgb(16 122 196);
+	}
+
+	&::before {
+		content: '';
+		display: inline-block;
+		margin: 0 7px 0 0;
+		height: 8px;
+		width: 8px;
+		border-radius: 100%;
+		background: white;
+	}
+
+	&.optionsSaved::before {
+		background: #259;
+	}
+}
+
+#moduleOptionsSaveStatus {
+	float: right;
+	padding: 4px;
+	margin-right: 1em;
+	background-color: #fffacd;
+}
+
+#SearchRES-results-container {
+	display: none;
+
+	+ #SearchRES-boilerplate {
+		margin-top: 1em;
+		border-top: 1px black solid;
+		padding-top: 1em;
+	}
+
+	li {
+		list-style-type: none;
+		border-bottom: 1px dashed #ccc;
+		cursor: pointer;
+		margin-left: 0;
+		padding-left: 10px;
+		padding-top: 24px;
+		padding-bottom: 24px;
+
+		&:hover {
+			background-color: #fafaff;
+		}
+	}
+}
+
+#SearchRES-results-hidden {
+	display: none;
+	font-style: italic;
+}
+
+.advanced-options-disabled #SearchRES-results-hidden.advancedResults {
+	display: inline;
+}
+
+.SearchRES-result-header {
+	margin-bottom: 12px;
+	color: #666;
+}
+
+.SearchRES-result-title {
+	font-weight: bold;
+
+	.advanced & {
+		font-style: italic;
+	}
+}
+
+.SearchRES-result-title,
+.SearchRES-breadcrumb {
+	display: block;
+}
+
+.SearchRES-breadcrumb {
+	font-weight: normal;
+	color: #888;
+}
+
+.SearchRES-result-copybutton {
+	float: right;
+	opacity: 0.4;
+	padding: 10px;
+	width: 26px;
+	height: 22px;
+	visibility: hidden;
+}
+
+#SearchRES-results li:hover .SearchRES-result-copybutton {
+	visibility: visible;
+}
+
+#SearchRES-results .SearchRES-result-copybutton:hover {
+	color: #888;
+}
+
+#SearchRES-input-container {
+	position: relative;
+	margin: 5px 0 10px 0;
+
+	&::after {
+		position: absolute;
+		right: 0;
+		padding: 5px;
+		color: rgb(130 177 210);
+		font: normal 16px/1 Batch;
+		content: '\f094';
+	}
+}
+
+#SearchRES-input {
+	box-sizing: border-box;
+	width: 100%;
+	font-size: 14px;
+	border: 1px solid rgb(171 204 227);
+	border-radius: 2px;
+}
+
+#keyCodeModal {
+	display: none;
+	width: 200px;
+	height: 40px;
+	position: absolute;
+	background-color: #FFF;
+	padding: 4px;
+	border: 2px solid #CCC;
+}
+
+/* stylelint-disable no-duplicate-selectors -- additive identity overrides */
+// Zovo Threads identity layer: additive selectors over the retained RES console.
+html {
+	padding: 0;
+	background: #edf6f1;
+}
+
+body {
+	color: #17332e;
+	font: 14px/1.5 Inter, ui-sans-serif, system-ui, sans-serif;
+	background: #edf6f1;
+	border-radius: 0;
+	box-shadow: none;
+}
+
+#RESConsoleContainer {
+	min-height: 100vh;
+	background: #edf6f1;
+}
+
+.RESDialogTopBar {
+	height: 64px;
+	padding: 12px 20px;
+	background: #f9fcfa;
+	border-bottom: 1px solid #d4e5dc;
+	border-radius: 0;
+	box-shadow: 0 8px 28px -24px rgba(7, 74, 57, .8);
+}
+
+#RESConsoleTopBar {
+	display: flex;
+	gap: 12px;
+	align-items: center;
+	padding-right: 56px;
+}
+
+#RESConsoleTopBar .res-logo {
+	width: 40px;
+	height: 40px;
+	background: url('../../images/icon48.png') center/contain no-repeat;
+}
+
+#RESConsoleTopBar h1 {
+	color: #17332e;
+	font-size: 20px;
+	letter-spacing: -.01em;
+}
+
+#RESConsoleVersionDisplay {
+	margin-left: 0;
+	padding: 4px 8px;
+	color: #526b62;
+	background: #e3f2ea;
+	border-radius: 999px;
+}
+
+#RESConsoleSubredditLink {
+	margin-left: 0;
+	color: #08745a;
+	font-size: 12px;
+	font-weight: 700;
+}
+
+#moduleOptionsSave {
+	order: 4;
+	min-height: 40px;
+	margin: 0 0 0 auto;
+	padding: 0 16px;
+	color: #fff;
+	background: #08745a;
+	border: 0;
+	border-radius: 10px;
+	font-weight: 700;
+	line-height: 40px;
+}
+
+#moduleOptionsSave:hover {
+	background: #075b48;
+}
+
+#RESConsoleContent {
+	top: 64px;
+	gap: 16px;
+	height: calc(100vh - 64px);
+	padding: 16px;
+}
+
+#RESConfigPanelModulesPane {
+	width: 240px;
+	padding: 16px;
+	background: #f9fcfa;
+	border: 1px solid #d4e5dc;
+	border-radius: 16px;
+}
+
+#SearchRES-input {
+	min-height: 40px;
+	padding: 8px 36px 8px 12px;
+	color: #17332e;
+	background: #fff;
+	border: 1px solid #bdd5c9;
+	border-radius: 10px;
+}
+
+#RESConfigPanelModulesList > ul {
+	border: 0;
+	border-radius: 10px;
+}
+
+.RESConfigPanelCategory h3 {
+	padding: 8px 12px;
+	border-top-color: #e0ece5;
+	font-weight: 700;
+}
+
+.RESConfigPanelCategory li.active h3 {
+	color: #075b48;
+	background: #dff4ea;
+	border-bottom-color: #c4e4d5;
+}
+
+.moduleButton {
+	padding: 8px 12px;
+	color: #7b8e87;
+	border-radius: 8px;
+}
+
+.moduleButton.enabled {
+	color: #36554a;
+}
+
+.moduleButton.active {
+	color: #075b48;
+	background: #edf8f2;
+	box-shadow: inset 4px 0 0 #ff7254;
+}
+
+#RESConfigPanelOptions {
+	padding: 16px 24px;
+	background: #f9fcfa;
+	border: 1px solid #d4e5dc;
+	border-radius: 16px;
+}
+
+.moduleName {
+	font: 700 24px/1.2 Inter, ui-sans-serif, system-ui, sans-serif;
+	letter-spacing: -.02em;
+}
+
+.moduleDescription {
+	max-width: 760px;
+	color: #526b62;
+}
+
+.optionContainer {
+	gap: 16px;
+	margin: 12px 0;
+	padding: 16px 20px;
+	background: #fff;
+	border: 1px solid #d4e5dc;
+	border-radius: 12px;
+}
+
+.optionContainer:not(.table, .specialOptionType) .optionSetting {
+	padding: 0 16px;
+	border-right-color: #cfe0d7;
+}
+
+.optionTitle {
+	font-size: 16px;
+}
+
+.optionKey,
+.moduleKey {
+	color: #7b8e87;
+}
+
+.optionsTable th {
+	color: #fff;
+	background: #08745a;
+	text-shadow: none;
+}
+
+.optionsTable tr:nth-child(even) {
+	background: #edf8f2;
+}
+
+@media (prefers-color-scheme: dark) {
+	html,
+	body,
+	#RESConsoleContainer {
+		color: #e8f2ed;
+		background: #0c1916;
+	}
+
+	.RESDialogTopBar,
+	#RESConfigPanelModulesPane,
+	#RESConfigPanelOptions {
+		background: #13241f;
+		border-color: #29433a;
+	}
+
+	#RESConsoleTopBar h1,
+	.moduleName,
+	.moduleButton.enabled {
+		color: #e8f2ed;
+	}
+
+	#RESConsoleVersionDisplay,
+	.RESConfigPanelCategory li.active h3 {
+		color: #8ee3c4;
+		background: #183c31;
+	}
+
+	#SearchRES-input,
+	.optionContainer {
+		color: #e8f2ed;
+		background: #10211c;
+		border-color: #29433a;
+	}
+
+	.moduleDescription,
+	.optionKey,
+	.moduleKey,
+	#RESAllOptionsSpan {
+		color: #9db0a8;
+	}
+
+	.RESConfigPanelCategory h3 {
+		border-top-color: #29433a;
+	}
+
+	.moduleButton.active {
+		color: #8ee3c4;
+		background: #183c31;
+	}
+
+	.optionContainer:not(.table, .specialOptionType) .optionSetting {
+		border-right-color: #29433a;
+	}
+
+	.optionsTable tr:nth-child(even) {
+		background: #183028;
+	}
+}
+/* stylelint-enable no-duplicate-selectors */
