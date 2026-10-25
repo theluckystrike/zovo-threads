@@ -3,7 +3,7 @@ name: RES Pipeline
 on:
   push:
     branches:
-    - master
+    - main
     tags:
       - v*.*.*
   pull_request:
